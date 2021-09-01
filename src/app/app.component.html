@@ -1,0 +1,17 @@
+<div *ngIf="showRouting">
+  <a class="btn btn-success" [routerLink]="['view-games']">View Games</a>
+  <a class="btn btn-success" [routerLink]="['upload-game']">Upload Game</a>
+  <button class="btn btn-success" (click)="Logout()">Logout</button>
+  <br />
+  <br />
+  <router-outlet></router-outlet>
+</div>
+
+
+<form *ngIf="showRouting===false">
+  <label>Username</label>
+  <input type="text" class="form-control" [(ngModel)]="user.username" name="username"/><br>
+  <label>Username</label>
+  <input type="password" class="form-control" [(ngModel)]="user.password" name="password"/>
+  <button (click)="Login()" class="btn btn-primary">Login</button>
+</form>
