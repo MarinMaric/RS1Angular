@@ -1,0 +1,27 @@
+<form>
+  <label>Naziv</label>
+  <input class="form-control" type="text" [(ngModel)]="naziv" name="naziv" required="true"/>
+  <span *ngIf="showError==true && (naziv==undefined ||naziv =='')" class="text-danger">Polje je obavezno</span><br>
+  <label>Opis</label>
+  <input class="form-control" type="text" [(ngModel)]="opis" name="opis" required="true" />
+  <span *ngIf="showError==true && (opis==undefined ||opis =='')" class="text-danger">Polje je obavezno</span><br>
+  <label>Cijena</label>
+  <input class="form-control" type="number" [(ngModel)]="cijena" name="cijena" required="true"/>
+  <span *ngIf="showError==true && (cijena==undefined ||cijena <0)" class="text-danger">Polje je obavezno</span><br>
+  <label>Link igre</label>
+  <input class="form-control" type="text" [(ngModel)]="linkIgre" name="linkIgre" required="true"/>
+  <span *ngIf="showError==true && (linkIgre==undefined ||linkIgre=='')" class="text-danger">Polje je obavezno</span><br>
+  <label>Trailer URL</label>
+  <input class="form-control" type="text" [(ngModel)]="trailerUrl" name="trailerUrl" required="true"/>
+  <span *ngIf="showError==true && (trailerUrl==undefined ||trailerUrl=='')" class="text-danger">Polje je obavezno</span><br>
+  <label>Žanr</label>
+  <select [(ngModel)]="zanr" name="zanr" required="true">
+    <option *ngFor="let z of zanrovi" [ngValue]="z" >{{z.naziv}}</option>
+  </select>
+  <span *ngIf="showError==true && zanr==undefined" class="text-danger">Polje je obavezno</span>
+  <br>
+  <button (click)="onUpload()"
+          class="btn btn-success">
+    Upload
+  </button>
+</form>

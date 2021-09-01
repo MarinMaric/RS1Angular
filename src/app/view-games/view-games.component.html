@@ -1,0 +1,26 @@
+Filter naziv igre: <input [(ngModel)]="filterNaziv" />
+
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>Naziv</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of filterGames()">
+      <td>{{i.naziv}}</td>
+      <td>
+        <a class="button" [routerLink]="['/game-details', i.igraId]">Detalji igre</a> |
+        <button [routerLink]="['/edit-game', i.igraId]">Edit</button>
+        <button (click)="DeleteGame(i)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
