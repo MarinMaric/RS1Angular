@@ -15,9 +15,10 @@
   <input class="form-control" type="text" [(ngModel)]="trailerUrl" name="trailerUrl" required="true"/>
   <span *ngIf="showError==true && (trailerUrl==undefined ||trailerUrl=='')" class="text-danger">Polje je obavezno</span><br>
   <label>Žanr</label>
-  <select [(ngModel)]="zanr" name="zanr" required="true">
-    <option *ngFor="let z of zanrovi" [ngValue]="z"  >{{z.naziv}}</option>
+  <select [(ngModel)]="zanr" id="zanrSelect" name="zanr" required="true">
+   <option *ngFor="let z of zanrovi" [ngValue]="z"  >{{z.naziv}}</option>
   </select>
+
   <span *ngIf="showError==true && zanr==undefined" class="text-danger">Polje je obavezno</span><br>
   <img *ngIf="this.slikaPrikaz!=undefined" src="{{this.slikaPrikaz}}" />
   <input type="file" class="file-input" (change)="imageUpload($event)" name="file">

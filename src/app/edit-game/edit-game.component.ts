@@ -14,7 +14,7 @@ import {IgraDetaljiVM} from "../IgraDetaljiVM";
 export class EditGameComponent implements OnInit {
   @Input() igraID:number;
 
-  shortLink: string = "";
+  shortLink: string="";
   loading: boolean = false;
   file:File;
   naziv:string;
@@ -32,6 +32,7 @@ export class EditGameComponent implements OnInit {
   apiUrl:string;
 
   constructor(private http:HttpClient, private route:ActivatedRoute, private fileUploadService: FileUploadService) {
+    this.zanr=new ZanrDropdownVM();
   }
 
   ngOnInit(): void {
@@ -43,8 +44,6 @@ export class EditGameComponent implements OnInit {
 
     if(this.igraID!=undefined)
       this.InitializeParameters();
-
-
   }
 
   zanrChange(event) {
@@ -85,7 +84,7 @@ export class EditGameComponent implements OnInit {
       this.zanr=new ZanrDropdownVM();
       this.zanr.zanrId=result.zanrValue;
       this.zanr.naziv=result.zanr;
-      alert("Zanr:" + this.zanr.naziv + " | " + this.zanr.zanrId);
+
     });
   }
   Validate():boolean{

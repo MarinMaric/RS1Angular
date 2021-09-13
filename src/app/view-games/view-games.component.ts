@@ -13,7 +13,8 @@ export class ViewGamesComponent implements OnInit {
   igre:IgraBrief[];
   title:string;
   currentPage:number;
-
+  colSize:number;
+  itemsPerPage:number=5;
   filterNaziv:string="";
 
   constructor(private http:HttpClient) {
@@ -23,8 +24,13 @@ export class ViewGamesComponent implements OnInit {
   }
 
   ViewGames(){
+    let url:string = MyConfig.webAppUrl + "/GamesAngular/ViewGamesJson";
     var tokenTest = localStorage.getItem('loginToken');
     var token = tokenTest !== null ? tokenTest : '{}';
+
+    if(this.currentPage!=0)
+      url+="?currentPage="+this.currentPage+"&itemsPerPage="+this.itemsPerPage+"&filter="+this.filterNaziv;
+
     const headerDict = {
       'Content-Type': 'application/json',
       'MojAutentifikacijaToken': token
@@ -33,8 +39,10 @@ export class ViewGamesComponent implements OnInit {
     const requestOptions = {
       headers: new HttpHeaders (headerDict),
     };
-
-    this.http.get<IgraBrief[]>(MyConfig.webAppUrl+'/GamesAngular/ViewGamesJson', requestOptions).subscribe((result:IgraBrief[])=>{
+    this.http.get<number>(MyConfig.webAppUrl+"/GamesAngular/CollectionSize?filter="+this.filterNaziv, requestOptions).subscribe((result:number)=>{
+      this.colSize=result;
+    })
+    this.http.get<IgraBrief[]>(url, requestOptions).subscribe((result:IgraBrief[])=>{
       this.igre=result;
     });
   }
@@ -52,11 +60,15 @@ export class ViewGamesComponent implements OnInit {
     this.ViewGames();
   }
   filterGames():Array<IgraBrief>{
-    if(this.filterNaziv!="")
-      return this.igre.filter(x=>x.naziv.includes(this.filterNaziv))
-    else return this.igre;
+    //if(this.filterNaziv!="")
+      //return this.igre.filter(x=>x.naziv.includes(this.filterNaziv))
+    //else
+    return this.igre;
   }
 
-
+  SearchButton(){
+    this.currentPage=1;
+    this.ViewGames();
+  }
 
 }

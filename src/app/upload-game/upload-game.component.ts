@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
 import {FileUploadService} from "../game-details/file-upload.service";
 import {IgraDetaljiVM} from "../IgraDetaljiVM";
@@ -47,7 +47,7 @@ export class UploadGameComponent implements OnInit {
   onUpload() {
     this.loading = !this.loading;
 
-    if(this.Validate()){
+    if(!this.Validate()){
       this.fileUploadService.UploadGame(null, this.naziv, this.opis, this.cijena, this.linkIgre, this.trailerUrl, this.zanr, this.file).subscribe(
         (event: any) => {
           if (typeof (event) === 'object') {
@@ -57,6 +57,9 @@ export class UploadGameComponent implements OnInit {
 
             this.loading = false; // Flag variable
           }
+        },
+        error => {
+            alert("Naziv igre je zauzet");
         }
       );
     }

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {MyConfig} from "../MyConfig";
 import {IgraDetaljiVM} from "../IgraDetaljiVM";
+import {IgraBrief} from "../IgraBrief";
 @Injectable({
   providedIn: 'root'
 })
@@ -31,10 +32,10 @@ export class FileUploadService {
       formData.append("slikaUpload", file, file.name);
 
     let headers = new HttpHeaders({
-      'MojAutentifikacijaToken':token
+      'MojAutentifikacijaToken':token,
     });
     let options = { headers: headers };
-    return this.http.post(MyConfig.webAppUrl+"/GamesAngular/UploadGame", formData, options);
+    return this.http.post<string>(MyConfig.webAppUrl+"/GamesAngular/UploadGame", formData, options);
   }
 
 }

@@ -3,12 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { ViewGamesComponent } from './view-games/view-games.component';
 import { RouterModule } from '@angular/router';
 import { UploadGameComponent } from './upload-game/upload-game.component';
 import { EditGameComponent } from './edit-game/edit-game.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditGameComponent } from './edit-game/edit-game.component';
         ]),
         FormsModule,
       CommonModule,
-      HttpClientModule
+      HttpClientModule,
+      NgbModule
     ],
   providers: [],
   bootstrap: [AppComponent]

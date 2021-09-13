@@ -1,4 +1,5 @@
 Filter naziv igre: <input [(ngModel)]="filterNaziv" />
+<button (click)="SearchButton()">Search</button>
 
 <div>
   <table>
@@ -20,6 +21,8 @@ Filter naziv igre: <input [(ngModel)]="filterNaziv" />
     </tbody>
   </table>
 
+  <ngb-pagination [collectionSize]="colSize" [pageSize]="itemsPerPage" [(page)]="currentPage" [maxSize]="colSize" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)">
+  </ngb-pagination>
 </div>
 
 
